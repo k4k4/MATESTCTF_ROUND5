@@ -1,11 +1,11 @@
 from pwn import *
 
-def buy(p,quan,c,addr):
+def buy(p,q,c,addr):
 	r.sendline('1')
 	r.recvuntil("?:")
 	r.sendline(str(p))
 	r.recvuntil("quantity:")
-	r.sendline(quan)
+	r.sendline(q)
 	r.recvuntil("(Y/N)")
 	r.sendline(c)
 	r.sendline(addr)
